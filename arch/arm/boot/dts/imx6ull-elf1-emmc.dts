@@ -44,6 +44,30 @@
 		status = "okay";
 	};
 
+	gpio-keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_keys>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		autorepeat;
+		key1 {
+			label = "KEY1";
+			linux,code = <KEY_ENTER>;
+			gpios = <&gpio5 4 GPIO_ACTIVE_LOW>;
+		};
+		key2 {
+			label = "KEY2";
+			linux,code = <KEY_UP>;
+			gpios = <&gpio5 2 GPIO_ACTIVE_LOW>;
+		};
+		key3 {
+			label = "KEY3";
+			linux,code = <KEY_DOWN>;
+			gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
+		};
+	};
+
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
@@ -592,6 +616,13 @@
 	pinctrl-names = "default_snvs";
         pinctrl-0 = <&pinctrl_hog_2>;
         imx6ul-evk {
+		pinctrl_keys: keysgrp {
+			fsl,pins = <
+			MX6ULL_PAD_SNVS_TAMPER4__GPIO5_IO04	0x00000000
+			MX6ULL_PAD_SNVS_TAMPER2__GPIO5_IO02	0x00000000
+			MX6ULL_PAD_SNVS_TAMPER9__GPIO5_IO09	0x00000000
+			>;
+		};
 		pinctrl_hog_2: hoggrp-2 {
                         fsl,pins = <
                                 MX6ULL_PAD_SNVS_TAMPER0__GPIO5_IO00      0x80000000
